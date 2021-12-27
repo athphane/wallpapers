@@ -8,3 +8,7 @@ for file in `find . -type f \( -iname \*.jpg -o -iname \*.png -o -iname \*.jpeg 
   mv -i -- "$file" "$new"
   let a=a+1
 done
+
+git stage .
+git commit -m 'Reload'
+git push
