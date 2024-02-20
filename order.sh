@@ -5,7 +5,7 @@ find . -type f \( -iname \*.jpg -o -iname \*.png -o -iname \*.jpeg \) -print0 | 
   filename=$(basename -- "$file")
   extension="${filename##*.}"
   filename_noext="${filename%.*}"
-  new="${directory}/${filename_noext}_${a}.${extension}" # Include directory and add number to filename
+  new="${directory}/${filename_noext}.${extension}" # Include directory without adding number to filename
   
   echo "$new"
   mv -n -- "$file" "$new"
