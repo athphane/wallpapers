@@ -1,9 +1,11 @@
 a=1
 
-for file in $(find . -type f \( -iname \*.jpg -o -iname \*.png -o -iname \*.jpeg \)); do
-  extension=${file##*.}
+find . -type f \( -iname \*.jpg -o -iname \*.png -o -iname \*.jpeg \) -print0 | while read -d $'\0' file; do
   directory=$(dirname "$file")
-  new=$(printf "%s/%04d.$extension" "$directory" "$a") # Include directory in the output
+  filename=$(basename -- "$file")
+  extension="${filename##*.}"
+  filename_noext="${filename%.*}"
+  new="${directory}/${filename_noext}_${a}.${extension}" # Include directory and add number to filename
   
   echo "$new"
   mv -n -- "$file" "$new"
